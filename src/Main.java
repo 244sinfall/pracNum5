@@ -191,8 +191,9 @@ public class Main {
      * Создает новый экземпляр мебели
      * @return мебель
      * @throws InvalidSelectionException При вводе неверного значения в любом из селекторов. При любой ошибке экземпляр не будет создан
+     * @throws AssertionError При доставке недопустимого значения в конструктор
      */
-    public static Furniture createNewFurniture() throws InvalidSelectionException {
+    public static Furniture createNewFurniture() throws InvalidSelectionException, AssertionError {
         // Передача исключения наверх
         return new Furniture(receiveNewFurnitureType(), receiveNewFurnitureMaterial(), receiveNewFurnitureName(),
                 receiveNewFurniturePrice(), receiveNewFurnitureSquareArea());
@@ -303,7 +304,7 @@ public class Main {
                 case 2:
                     try {
                         furniture.add(createNewFurniture());
-                    } catch (InvalidSelectionException e) {
+                    } catch (InvalidSelectionException | AssertionError e) {
                         // Простой перехват исключения
                         System.out.println(e.getMessage());
                         break;
